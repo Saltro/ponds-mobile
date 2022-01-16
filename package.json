@@ -1,9 +1,9 @@
 {
-  "name": "typescript-nextjs-starter",
-  "description": "A TypeScript starter for Next.js that includes all you need to build amazing projects",
-  "version": "1.0.0",
+  "name": "ponds-mobile",
+  "description": "Task Pond Mobile",
+  "version": "0.0.1",
   "private": true,
-  "author": "João Pedro Schmitz <hey@joaopedro.dev> (@jpedroschmitz)",
+  "author": "Saltro Ping",
   "license": "MIT",
   "keywords": [
     "nextjs",
@@ -22,8 +22,8 @@
   },
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
-      "yarn lint --fix",
-      "yarn format"
+      "pnpm lint --fix",
+      "pnpm format"
     ]
   },
   "dependencies": {
@@ -42,6 +42,7 @@
     "commitizen": "4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "8.6.0",
+    "eslint-config-alloy": "4.4.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "8.3.0",
     "eslint-import-resolver-typescript": "2.5.0",
