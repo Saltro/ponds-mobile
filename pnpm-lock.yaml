@@ -8,6 +8,7 @@ specifiers:
   '@types/react-dom': 17.0.11
   '@typescript-eslint/eslint-plugin': 5.9.1
   '@typescript-eslint/parser': 5.9.1
+  axios: 0.25.0
   commitizen: 4.2.4
   cz-conventional-changelog: 3.3.0
   eslint: 8.6.0
@@ -26,6 +27,7 @@ specifiers:
   typescript: 4.5.4
 
 dependencies:
+  axios: registry.npmmirror.com/axios/0.25.0
   next: registry.npmmirror.com/next/12.0.7_8ea0df840a4126039579523f29859284
   react: registry.npmmirror.com/react/17.0.2
   react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
@@ -3250,6 +3252,16 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  registry.npmmirror.com/axios/0.25.0:
+    resolution: {integrity: sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/axios/download/axios-0.25.0.tgz}
+    name: axios
+    version: 0.25.0
+    dependencies:
+      follow-redirects: registry.npmmirror.com/follow-redirects/1.14.7
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   registry.npmmirror.com/axobject-query/2.2.0:
     resolution: {integrity: sha1-lD1H4QwLcEqkInXiDt83ImSJib4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/axobject-query/download/axobject-query-2.2.0.tgz}
     name: axobject-query
@@ -4258,6 +4270,18 @@ packages:
     name: flatted
     version: 3.2.4
     dev: true
+
+  registry.npmmirror.com/follow-redirects/1.14.7:
+    resolution: {integrity: sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/follow-redirects/download/follow-redirects-1.14.7.tgz}
+    name: follow-redirects
+    version: 1.14.7
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
 
   registry.npmmirror.com/foreach/2.0.5:
     resolution: {integrity: sha1-C+4AUBiusmDQo6865ljdATbsG5k=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/foreach/download/foreach-2.0.5.tgz}

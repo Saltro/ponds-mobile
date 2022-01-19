@@ -3,6 +3,7 @@
   "extends": ["next/core-web-vitals", "alloy", "alloy/react", "alloy/typescript", "prettier"],
   "rules": {
     "prettier/prettier": "error",
+    "no-undef": "off",
     "import/prefer-default-export": "off",
     "import/extensions": [
       "error",
