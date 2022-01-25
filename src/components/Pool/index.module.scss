@@ -1,0 +1,11 @@
+.container {
+  align-items: left;
+  justify-content: left;
+  flex-direction: column;
+  display: flex;
+  height: 100%;
+  .title {
+    align-self: left;
+    margin-left: 1em;
+  }
+}

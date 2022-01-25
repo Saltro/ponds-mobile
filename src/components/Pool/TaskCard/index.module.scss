@@ -1,0 +1,26 @@
+.card {
+  height: 4em;
+  width: 90%;
+  border-radius: 0.5em;
+  background-color: white;
+  box-sizing: border-box;
+  margin-bottom: 0.75em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1em;
+  box-shadow: 0.1em 0.1em 0.25em rgba(128, 128, 128, 0.568);
+  margin-left: 1.25em;
+
+  .task {
+    display: flex;
+    flex-direction: column;
+    .name {
+      font-size: large;
+    }
+    .category {
+      font-size: small;
+      color: gray;
+    }
+  }
+}
