@@ -3,10 +3,14 @@
   width: 100%;
   min-height: 100vh;
   height: fit-content;
-  background-color: #000000;
+  background-color: rgb(13, 20, 67);
   padding-right: 15%;
 
   & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
     transform: translateX(-80%);
     opacity: 0;
     transition: all 0.5s ease;
@@ -21,6 +25,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
+    cursor: pointer;
   }
 }
 
@@ -46,9 +51,76 @@
   margin: 20px 30px 0;
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 #content {
   height: 100vh;
   overflow: auto;
+}
+
+#personalSection {
+  height: 80%;
+  width: 100%;
+  padding: 0 20vw;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    padding: 0 10vw;
+  }
+
+  .avatar {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border-bottom: 5px rgb(142, 62, 248) solid;
+    border-right: 5px rgb(142, 62, 248) solid;
+    border-left: 5px rgb(21, 101, 215) solid;
+    border-top: 5px rgb(21, 101, 215) solid;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  .name {
+    color: white;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      font-size: 20px;
+      margin: 5px 0;
+
+      .icon {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .buttonWrapper {
+    @media (max-width: 600px) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .button {
+    margin-top: 30px;
+    padding: 5px;
+    border: 1px solid white; //自定义边框
+    outline: none;
+    background-color: rgb(7, 112, 250);
+    font-size: 20px;
+    color: white;
+  }
 }
