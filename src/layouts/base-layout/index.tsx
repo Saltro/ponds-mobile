@@ -5,21 +5,14 @@ import List from './components/List';
 import Button from './components/Button';
 import styles from './index.module.scss';
 
-interface userMsg {
-  username: string;
-  nickname: string;
-  avatar: string;
-  mobile: string;
-  register_date: string;
-}
-
 const formatTime = (data: string) => {
   return data.slice(0, 10);
 };
 
 const BaseLayout: React.FC = ({ children }) => {
   const [isSideBarShow, setIsSideBarShow] = useState(false);
-  const [userMsg, setUserMsg] = useState<userMsg>({
+  const [userMsg, setUserMsg] = useState<IUserInfo>({
+    id: 0,
     username: '',
     nickname: '',
     avatar: '',
@@ -44,8 +37,9 @@ const BaseLayout: React.FC = ({ children }) => {
     // TODO
     console.log('获取用户信息');
     setUserMsg({
+      id: 111,
       username: '张三',
-      nickname: '欧蕾哇 Lufei',
+      nickname: '元前端 Fe',
       avatar: 'https://s3.bmp.ovh/imgs/2021/11/f4919f5e2b8f7494.jpg',
       mobile: '13333333333',
       register_date: formatTime('2021-11-14T00:00:00.000Z'),

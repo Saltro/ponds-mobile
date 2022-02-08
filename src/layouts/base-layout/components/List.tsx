@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { UserOutlined, PhoneOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { UserOutlined, PhoneOutlined, ClockCircleOutlined, IdcardOutlined } from '@ant-design/icons';
 import styles from '../index.module.scss';
 
 interface ListProps {
@@ -11,6 +11,7 @@ interface ItemProps {
 }
 
 const iconMap = new Map([
+  ['id', <IdcardOutlined className={styles.icon} key={1} />],
   ['username', <UserOutlined className={styles.icon} key={1} />],
   ['mobile', <PhoneOutlined rotate={90} className={styles.icon} key={2} />],
   ['register_date', <ClockCircleOutlined className={styles.icon} key={3} />],

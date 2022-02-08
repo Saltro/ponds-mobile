@@ -5,6 +5,7 @@
   height: fit-content;
   background-color: rgb(13, 20, 67);
   padding-right: 15%;
+  overflow: hidden;
 
   & > div {
     display: flex;
@@ -62,7 +63,7 @@
 #personalSection {
   height: 80%;
   width: 100%;
-  padding: 0 20vw;
+  padding: 0 30vw;
   box-sizing: border-box;
 
   @media (max-width: 600px) {

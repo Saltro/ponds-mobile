@@ -4,5 +4,5 @@ declare interface IUserInfo {
   nickname: string;
   avatar: string;
   mobile: string;
-  register_date: Date;
+  register_date: string;
 }
