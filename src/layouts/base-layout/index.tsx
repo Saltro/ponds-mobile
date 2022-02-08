@@ -10,11 +10,22 @@ interface userMsg {
   nickname: string;
   avatar: string;
   mobile: string;
+  register_date: string;
 }
+
+const formatTime = (data: string) => {
+  return data.slice(0, 10);
+};
 
 const BaseLayout: React.FC = ({ children }) => {
   const [isSideBarShow, setIsSideBarShow] = useState(false);
-  const [userMsg, setUserMsg] = useState<userMsg>({ username: '', nickname: '', avatar: '', mobile: '' });
+  const [userMsg, setUserMsg] = useState<userMsg>({
+    username: '',
+    nickname: '',
+    avatar: '',
+    mobile: '',
+    register_date: '',
+  });
 
   const showSideBar = () => {
     setIsSideBarShow(true);
@@ -22,6 +33,11 @@ const BaseLayout: React.FC = ({ children }) => {
 
   const hideSideBar = () => {
     setIsSideBarShow(false);
+  };
+
+  const loginOut = () => {
+    window.localStorage.removeItem('token');
+    // TODO: 跳转到登录注册页面
   };
 
   useEffect(() => {
@@ -32,6 +48,7 @@ const BaseLayout: React.FC = ({ children }) => {
       nickname: '欧蕾哇 Lufei',
       avatar: 'https://s3.bmp.ovh/imgs/2021/11/f4919f5e2b8f7494.jpg',
       mobile: '13333333333',
+      register_date: formatTime('2021-11-14T00:00:00.000Z'),
     });
   }, []);
 
@@ -44,7 +61,7 @@ const BaseLayout: React.FC = ({ children }) => {
             <p className={styles.name}>{userMsg.nickname}</p>
             <List userMsg={userMsg} />
             <div className={styles.buttonWrapper}>
-              <Button>退出登录</Button>
+              <Button onClick={loginOut}>退出登录</Button>
             </div>
           </section>
           <div className={styles.close}>

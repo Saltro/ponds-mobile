@@ -1,5 +1,5 @@
-import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
 import { Fragment } from 'react';
+import { UserOutlined, PhoneOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import styles from '../index.module.scss';
 
 interface ListProps {
@@ -13,6 +13,7 @@ interface ItemProps {
 const iconMap = new Map([
   ['username', <UserOutlined className={styles.icon} key={1} />],
   ['mobile', <PhoneOutlined rotate={90} className={styles.icon} key={2} />],
+  ['register_date', <ClockCircleOutlined className={styles.icon} key={3} />],
 ]);
 
 const Item: React.FC<ItemProps> = ({ children, icon }) => {
@@ -25,10 +26,12 @@ const Item: React.FC<ItemProps> = ({ children, icon }) => {
 };
 
 const List: React.FC<ListProps> = ({ userMsg }) => {
-  const msgList = Object.keys(userMsg).map((msg, i) => {
-    if (!iconMap.get(msg)) return null;
-    return { icon: <Fragment key={i}> {iconMap.get(msg)}</Fragment>, detail: userMsg[msg] };
-  });
+  const msgList = Object.keys(userMsg)
+    .map((msg, i) => {
+      if (!iconMap.get(msg)) return null;
+      return { icon: <Fragment key={i}> {iconMap.get(msg)}</Fragment>, detail: userMsg[msg] };
+    })
+    .filter((n) => n);
 
   return (
     <div id={styles.list} className={styles.list}>
