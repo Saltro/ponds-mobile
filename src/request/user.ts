@@ -1,7 +1,8 @@
 import instance from './instance';
 
 interface IUserInfoWithToken extends IUserInfo {
-  token: string;
+  access_token: string;
+  refresh_token: string;
 }
 
 const login = (username: string, password: string) => {

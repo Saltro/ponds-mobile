@@ -4,7 +4,7 @@ import {
   ExclamationCircleOutlined,
   InfoCircleOutlined,
 } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './index.module.scss';
 
@@ -15,10 +15,11 @@ interface Props {
   type?: Type;
   duration?: number;
   top?: number;
+  remove: () => void;
 }
 
 // 单例标识变量
-let _comp: any = null;
+let _comp: ReactElement | null = null;
 
 // icon map
 const iconMap: any = {
@@ -29,19 +30,37 @@ const iconMap: any = {
 };
 
 const Message: React.FC<Props> = (props) => {
-  const { msg, type = 'success', duration = 3000, top = 18 } = props;
-  const [isShow, setShow] = useState(true);
+  const { msg, type = 'success', duration = 3000, top = 18, remove } = props;
+  const [isShow, setShow] = useState(false);
   const renderIcon = (type: string) => {
     return iconMap[type];
   };
+  const onClose = useCallback(() => {
+    setShow(false);
+    setTimeout(() => {
+      remove();
+    }, 200);
+  }, [remove]);
+  const onOpen = useCallback(
+    (duration: number) => {
+      let timer = setTimeout(() => {
+        setShow(true);
+      }, 10);
+      if (duration !== 0) {
+        setTimeout(() => {
+          onClose();
+        }, duration);
+      }
+    },
+    [onClose],
+  );
+
   useEffect(() => {
-    let timer = setTimeout(() => {
-      setShow(false);
-    }, duration);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [duration]);
+    onOpen(duration);
+    // return () => {
+    //   clearTimeout(timer);
+    // };
+  }, [duration, onOpen]);
   return (
     <div style={{ paddingTop: top + 'px' }}>
       {!!isShow && (
@@ -54,12 +73,26 @@ const Message: React.FC<Props> = (props) => {
   );
 };
 
+const removeComp = (container: HTMLElement) => {
+  ReactDOM.unmountComponentAtNode(container);
+  document.body.removeChild(container);
+};
+
 const dispatch = (msg: string, type: Type) => {
   // 单例模式
   return (function () {
     if (!_comp) {
-      _comp = <Message msg={msg} type={type} />;
       const container = document.createElement('div');
+      _comp = (
+        <Message
+          msg={msg}
+          type={type}
+          remove={() => {
+            removeComp(container);
+            _comp = null;
+          }}
+        />
+      );
       container.classList.add(styles['message-container']);
       document.body.appendChild(container);
       ReactDOM.render(_comp, container);
