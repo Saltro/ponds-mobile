@@ -65,6 +65,7 @@
   width: 100%;
   padding: 0 30vw;
   box-sizing: border-box;
+  position: relative;
 
   @media (max-width: 600px) {
     padding: 0 10vw;
@@ -85,10 +86,31 @@
     }
   }
 
-  .name {
+  .avatarEdit {
+    position: absolute;
+    top: 0;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .nickname {
     color: white;
     font-size: 30px;
     font-weight: bolder;
+  }
+
+  .nicknameEdit {
+    margin: 1em 0;
+    outline: none;
+    background-color: rgb(13, 20, 67);
+    border: none;
+    border-bottom: 3px white solid;
+    color: white;
+    font-size: 30px;
+    box-sizing: border-box;
   }
 
   .list {
@@ -105,14 +127,23 @@
       .icon {
         margin-right: 10px;
       }
+
+      .edit {
+        outline: none;
+        background-color: rgb(13, 20, 67);
+        border: none;
+        border-bottom: 3px white solid;
+        color: white;
+        font-size: 20px;
+        box-sizing: border-box;
+      }
     }
   }
 
   .buttonWrapper {
-    @media (max-width: 600px) {
-      display: flex;
-      justify-content: center;
-    }
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .button {
@@ -121,7 +152,7 @@
     border-radius: 4px;
     border: none;
     outline: none;
-    width: 96px;
+    width: fit-content;
     height: 40px;
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     box-shadow: 0 8px 0 rgb(50, 109, 186);
