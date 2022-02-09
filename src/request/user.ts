@@ -10,12 +10,12 @@ const login = (username: string, password: string) => {
 };
 
 // eslint-disable-next-line max-params
-const register = (username: string, password: string, nickname: string, mobile: string, smsCode: string) => {
+const register = (username: string, password: string, nickname: string, phone: string, smsCode: string) => {
   return instance.post<ResponseBody<IUserInfoWithToken>>('/api/user/register/', {
     username,
     password,
     nickname,
-    mobile,
+    phone,
     smsCode,
   });
 };
