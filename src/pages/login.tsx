@@ -1,4 +1,4 @@
-import { Field, Form, FormStore } from '@/components/baseUI/Form';
+import { Field, Form, FormStore, Rules } from '@/components/baseUI/Form';
 import message from '@/components/baseUI/message/index';
 import Request from '@/request';
 import styles from '@/styles/Login.module.scss';
@@ -13,15 +13,19 @@ const Login: React.FC = () => {
     username: '',
     password: '',
   };
-  // const rules = {
-  //   username: (val: string) => {
-  //     return val.length >= 5;
-  //   },
-  //   password: (val: string) => {
-  //     return val.length >= 5;
-  //   },
-  // };
-  const loginFormRef = useRef(new FormStore(defaultVals, {}));
+  const rules: Rules = {
+    username: {
+      validator: (val: string) => {
+        return [val.length >= 5, '*用户名的长度应该不小于5'];
+      },
+    },
+    password: {
+      validator: (val: string) => {
+        return [val.length >= 5, '*密码的长度应该不小于5'];
+      },
+    },
+  };
+  const loginFormRef = useRef(new FormStore(defaultVals, rules));
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const { username, password } = loginFormRef.current.get();

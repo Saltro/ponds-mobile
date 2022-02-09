@@ -1,3 +1,4 @@
+import '@/components/baseUI/Form/index.scss';
 import '@/styles/global.css';
 import { AppProps } from 'next/app';
 

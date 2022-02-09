@@ -16,7 +16,7 @@ export const Field: React.FC<Props> = (props) => {
   const store = useContext(FormStoreContext);
 
   const [value, setValue] = useState(name && store ? store.get(name) : undefined);
-  // const [error, setError] = useState(name && store ? store.error(name) : undefined);
+  const [error, setError] = useState(name && store ? store.error(name) : undefined);
 
   const onChange = useCallback((...args) => name && store && store.set(name, valueGetter(...args)), [name, store]);
 
@@ -25,7 +25,7 @@ export const Field: React.FC<Props> = (props) => {
     return store.subscribe((n) => {
       if (n === name || n === '*') {
         setValue(store.get(name));
-        // setError(store.error(name));
+        setError(store.errors[name]);
       }
     });
   }, [name, store]);
@@ -36,11 +36,11 @@ export const Field: React.FC<Props> = (props) => {
     child = cloneElement(child, childProps);
   }
   return (
-    <div className="form">
+    <div className="field-container">
       {label && <label className="form-label">{label}</label>}
       <div className="form-content">
         <div className="form-control">{child}</div>
-        {/* <div className="form-message">{error}</div> */}
+        <div className="form-message">{error}</div>
       </div>
     </div>
   );

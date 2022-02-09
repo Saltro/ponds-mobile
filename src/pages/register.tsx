@@ -1,4 +1,4 @@
-import { Field, Form, FormStore } from '@/components/baseUI/Form';
+import { Field, Form, FormStore, Rules } from '@/components/baseUI/Form';
 import message from '@/components/baseUI/message/index';
 import Request from '@/request';
 import styles from '@/styles/register.module.scss';
@@ -16,7 +16,29 @@ const Register: React.FC = () => {
     password: '',
     smsCode: '1234',
   };
-  const registerFormRef = useRef<FormStore>(new FormStore(defaults));
+  const rules: Rules = {
+    username: {
+      validator: (val: string) => {
+        return [val.length >= 5, '*用户名的长度应该不小于5'];
+      },
+    },
+    password: {
+      validator: (val: string) => {
+        return [val.length >= 5, '*密码的长度应该不小于5'];
+      },
+    },
+    nickname: {
+      validator: (val: string) => {
+        return [val.length >= 3, '*昵称的长度应该不小于3'];
+      },
+    },
+    phone: {
+      validator: (val: string) => {
+        return [val.length === 11, '*请输入合法的手机号'];
+      },
+    },
+  };
+  const registerFormRef = useRef<FormStore>(new FormStore(defaults, rules));
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();

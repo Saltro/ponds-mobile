@@ -10,7 +10,7 @@
   .login-wrapper {
     background-color: #fff;
     // width: 250px;
-    height: 500px;
+    height: 600px;
     padding: 0 25px;
     position: relative;
     left: 50%;
@@ -21,7 +21,7 @@
       font-size: 30px;
       font-weight: bold;
       text-align: center;
-      line-height: 150px;
+      line-height: 120px;
     }
     .form-wrapper {
       display: block;
@@ -34,7 +34,7 @@
       outline: none;
       .input-item {
         box-sizing: border-box;
-        margin: 0 0 20px;
+        margin: 0;
         padding: 0;
         font-variant: tabular-nums;
         list-style: none;

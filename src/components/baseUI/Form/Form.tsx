@@ -5,22 +5,28 @@ type Defaults = Record<string | symbol, any>;
 
 type Listener = (name: string) => void;
 
-// type Rule = (name: string, values: any) => boolean | string;
+interface Rule {
+  validator: (val: any) => Error;
+}
 
-// type Rules = Record<string, Rule>;
+export type Rules = Record<string, Rule>;
+
+type Error = [validateRes: boolean, validateMsg: string];
+
+type Errors = Record<string, Error>;
 
 export class FormStore {
   public defaults: Defaults;
   public values: Defaults;
   public listeners: Listener[];
-  // public rules: Rules;
-  // public errors: any;
-  public constructor(defaults: Defaults) {
+  public rules: Rules;
+  public errors: Errors;
+  public constructor(defaults: Defaults, rules: Rules) {
     this.defaults = JSON.parse(JSON.stringify(defaults));
     this.values = defaults;
     this.listeners = [];
-    // this.rules = rules;
-    // this.errors = {};
+    this.rules = rules;
+    this.errors = {};
   }
 
   public subscribe(listener: Listener) {
@@ -44,48 +50,48 @@ export class FormStore {
   public set(name: string, value: any) {
     if (typeof name === 'string') {
       this.values[name] = value;
-      // this.validate(name);
+      this.validate(name);
       this.notify(name);
     }
   }
 
-  // public error(name: string | number, value?: any) {
-  //   const args = arguments;
+  public error(name?: string, value?: string) {
+    // 记录错误
+    const args = arguments;
 
-  //   if (args.length === 0) return this.errors;
+    if (args.length === 0) {
+      // 获取全部错误
+      return this.errors;
+    } else if (typeof name === 'string') {
+      if (value === undefined) {
+        // 删除错误
 
-  //   if (typeof name === 'number') {
-  //     name = Object.keys(this.errors)[name];
-  //   }
+        delete this.errors[name];
+      } else {
+        // 设置错误
+        this.errors[name] = [false, value];
+      }
+      return this.errors[name];
+    }
+  }
 
-  //   if (args.length === 2) {
-  //     if (value === undefined) {
-  //       delete this.errors[name];
-  //     } else {
-  //       this.errors[name] = value;
-  //     }
-  //   }
-  //   return this.errors[name];
-  // }
+  public validate(name?: string) {
+    if (name === undefined) {
+      // 校验整个表单域
+      Object.keys(this.rules).forEach((name) => {
+        this.validate(name);
+      });
+      this.notify('*');
+      return this.error();
+    }
+    const rule: Rule = this.rules[name!];
+    const value = this.get(name);
+    const result = rule.validator ? rule.validator(value)[0] : true;
 
-  // public validate(name?: string) {
-  //   if (name === undefined) {
-  //     // 校验整个表单域
-  //     Object.keys(this.rules).forEach((rule) => {
-  //       this.validate(rule);
-  //     });
-  //     this.notify('*');
-  //     return [this.error(0), this.get()];
-  //   }
-  //   const validator = this.rules[name!];
-  //   const value = this.get(name);
-  //   const result = validator ? validator(value!, this.values) : true;
+    const error = this.error(name, result ? undefined : rule.validator(value)[1] || '校验出错') as Error;
 
-  //   const message = this.error(name, result ? undefined : result || '');
-
-  //   const error = message === undefined ? undefined : new Error(message);
-  //   return [error, value];
-  // }
+    return error;
+  }
 
   public reset() {
     this.values = JSON.parse(JSON.stringify(this.defaults));
